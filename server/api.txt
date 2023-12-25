@@ -1,0 +1,17 @@
+[
+   {
+      'title': ''
+      "img": "",
+      "ingredients": [
+         {
+            "text": "2.5 pounds beef marrow bones",
+            "weight": 1133.980925,
+            "foodCategory": "meats",
+            "foodId": "food_bsmpfmbbcpw2v8bmiis8ibuab0i3",
+            "image": "https://www.edamam.com/food-img/625/625c3fd1616edc8df52672410a384de6.jpg"
+         },
+         
+      ],
+      "dish_type": "soup"
+   },
+]
