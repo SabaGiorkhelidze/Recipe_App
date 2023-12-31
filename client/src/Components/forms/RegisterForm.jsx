@@ -20,7 +20,7 @@ const RegisterForm = () => {
       .post("/api/register", formData)
       .then((response) => {
         setResponse(response.data.message);
-        navigate("/");
+        navigate("/home");
       })
       .catch((error) => {
         setError(error.response.data.message);
@@ -95,7 +95,7 @@ const RegisterForm = () => {
 
         <div className="text-grey-dark mt-6">
           Already have an account? {"    "}
-          <Link to={"/login"}>
+          <Link to={"/"}>
             <a
               className="no-underline border-b border-blue text-blue-600"
               href="#"

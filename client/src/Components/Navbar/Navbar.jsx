@@ -5,7 +5,8 @@ import { MainContext } from "../../Context/MainContext";
 
 const Navbar = () => {
   const [changeHeader, setChangeHeader] = useState(false);
-  const { userContext } = useContext(MainContext);
+  // const { AccoiuntContext } = useContext(MainContext);
+  
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY >= 50) {

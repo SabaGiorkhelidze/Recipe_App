@@ -19,7 +19,7 @@ const LoginForm = () => {
       .post("/api/login", loginData)
       .then((response) => {
         setMessage(response.data.message);
-        navigate("/");
+        navigate("/home");
       })
       .catch((error) => {
         setError(error.response.data.message);

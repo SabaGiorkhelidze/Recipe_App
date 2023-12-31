@@ -60,7 +60,7 @@ def login():
 
     if user and check_password_hash(user.password, password):
         session['user_id'] = user.id
-        print(session)
+        # print(session)
         return jsonify({'message': 'success'}), 200
     else:
         return jsonify({'message': 'invalid credentials'}), 401
@@ -145,24 +145,28 @@ def read_more(id):
 @app.route('/api/accountSettings', methods=["POST", "GET"])
 def account_settings():
     user_id = session.get('user_id')
-    print(session)
+    
+    # print(user_id)
     if user_id is None:
         return jsonify({'message': 'Unauthorized'}), 401
 
     user = User.query.filter_by(id=user_id).first()
+    print(user)
 
     if user:
+        print(user)
         user_info = {
-            'id': user.id,
-            'username': user.username,
-            'email': user.email,
-            # 'password': user.password
-
+            'user': {
+                'id': user.id,
+                'username': user.username,
+                'email': user.email,
+                # 'password': user.password
+            }
         }
         return jsonify(user_info)
     else:
-        # Handle the case where the user with the stored id does not exist
         return jsonify({'message': 'User not found'}), 404
+
 
 
 @app.route('/api/saveAccountChanges', methods=['POST', "GET"])

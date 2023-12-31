@@ -7,16 +7,21 @@ import { MainContext } from "./Context/MainContext";
 import { CardContext } from "./Context/CardContext";
 import Account from "./Components/Account/Account";
 import { ReadMoreContext } from "./Context/ReadMoreContext";
+import { AccountContext } from "./Context/AccountContext";
 function App() {
   return (
     <div className="App">
       <MainContext.Provider
-        value={{ ReadMoreContext: ReadMoreContext, CardContext: CardContext }}
+        value={{
+          ReadMoreContext: ReadMoreContext,
+          CardContext: CardContext,
+          AccountContext: AccountContext,
+        }}
       >
         <Routes>
-          <Route path="/" element={<Main />}></Route>
+          <Route path="/" element={<LoginForm />}></Route>
+          <Route path="/home" element={<Main />}></Route>
           <Route path="/register" element={<RegisterForm />}></Route>
-          <Route path="/login" element={<LoginForm />}></Route>
           <Route path="/home/:id" element={<ReadMore />}></Route>
           <Route path="/accountSettings" element={<Account />}></Route>
         </Routes>

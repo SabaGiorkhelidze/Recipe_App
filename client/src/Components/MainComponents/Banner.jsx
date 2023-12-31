@@ -1,26 +1,14 @@
 import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { CardContext } from "../../Context/CardContext";
+import useSearch from '../../Hooks/useSearch'
 
 const Banner = () => {
   const [searchParam, setSearchParam] = useState("");
   const { isSearchParam, setIsSearchParam, setSearchResults } =
     useContext(CardContext);
 
-  const handleSearchParamRequest = () => {
-    axios
-      .post(`/api/search/`, { title: searchParam })
-      .then((response) => {
-        setSearchResults(response.data);
-        setIsSearchParam(true);
-      })
-      .catch((error) => console.log(error));
-  };
-  useEffect(() => {
-    if (searchParam === "") {
-      setIsSearchParam(false);
-    }
-  }, [searchParam]);
+  const { handleSearchParamRequest } = useSearch(searchParam, setSearchResults, setIsSearchParam);
 
   return (
     <section className="header-banner h-96 w-full bg-yellow-50">
@@ -36,14 +24,11 @@ const Banner = () => {
             onChange={(e) => setSearchParam(e.target.value)}
             className="rounded-full px-4 focus:outline-none w-full bg-transparent"
             placeholder="Search here..."
-            onKeyDown={e => e.key === 'Enter' && handleSearchParamRequest()}
+            onKeyDown={(e) => e.key === 'Enter' && handleSearchParamRequest()}
           />
           <button
             className="text-sm bg-red-500 py-3 px-6 rounded-full text-white poppins ring-red-300 focus:ring-4 transition duration-300 hover:scale-105 transform"
-            onClick={() => {
-              handleSearchParamRequest();
-            }}
-            
+            onClick={() => handleSearchParamRequest()}
           >
             Search
           </button>

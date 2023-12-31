@@ -18,7 +18,6 @@ const Main = () => {
     axios
       .get("api/home")
       .then((response) => {
-        // console.log(response.data)
         setPosts(response.data);
 
         controls.start({ opacity: 1 });
