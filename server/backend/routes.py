@@ -46,7 +46,6 @@ def register():
 
     except Exception as e:
         # Log the exception for debugging
-        print(f"Error: {str(e)}")
         return jsonify({'message': 'An error occurred while registering the user.'}), 500
 
 
@@ -60,7 +59,6 @@ def login():
 
     if user and check_password_hash(user.password, password):
         session['user_id'] = user.id
-        # print(session)
         return jsonify({'message': 'success'}), 200
     else:
         return jsonify({'message': 'invalid credentials'}), 401
@@ -82,7 +80,6 @@ def set_db_posts():
     request = requests.get(url, headers=headers, params=querystring)
     response = request.json()
     item = response['hits']
-    # print(item[0])
     data = []
 
     for i in range(min(50, len(item))):
@@ -112,10 +109,8 @@ def home():
 @app.route('/api/search/', methods=["POST", "GET"])
 def search_item():
     post_request = request.json
-    print(post_request)
 
     search_param = post_request.get('title', '').lower()
-    print(search_param)
 
     searched_posts = Post.query.filter(func.lower(Post.title).ilike(f"%{search_param}%")).all()
 
@@ -123,7 +118,6 @@ def search_item():
                 'title': post.title,
                 'post_image': post.post_image}
                 for post in searched_posts]
-    print(response)
 
     return jsonify(response)
 
@@ -146,15 +140,12 @@ def read_more(id):
 def account_settings():
     user_id = session.get('user_id')
     
-    # print(user_id)
     if user_id is None:
         return jsonify({'message': 'Unauthorized'}), 401
 
     user = User.query.filter_by(id=user_id).first()
-    print(user)
 
     if user:
-        print(user)
         user_info = {
             'user': {
                 'id': user.id,
@@ -177,7 +168,6 @@ def saveAccountChanges():
         user_id = session.get('user_id')
         user = User.query.filter_by(id=user_id).first()
 
-        # print(user)
         if user is None:
             return jsonify({'message': 'User not found'}), 404
 
@@ -185,7 +175,6 @@ def saveAccountChanges():
             'username'] else user.username
         db.session.commit()
 
-        # print(user.password)
 
         # user.password = generate_password_hash(new_data['password']) if 'password' in new_data and user.password != generate_password_hash(
         #     new_data['password']) else user.password
@@ -198,7 +187,6 @@ def saveAccountChanges():
             # 'password': user.password
         }
 
-        # print(updated_user_data['password'])
         return jsonify({'message': 'User updated successfully', 'user': updated_user_data}), 200
 
     except Exception as e:

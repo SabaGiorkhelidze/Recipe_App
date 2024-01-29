@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import axios from "axios";
 
-const useSearch = (searchParam, setSearchResults, setIsSearchParam) => {
+const useSearch = (apiURL, searchParam, setSearchResults, setIsSearchParam) => {
   const handleSearchParamRequest = () => {
     axios
-      .post(`/api/search/`, { title: searchParam })
+      .post(apiURL, { title: searchParam })
       .then((response) => {
         setSearchResults(response.data);
         setIsSearchParam(true);

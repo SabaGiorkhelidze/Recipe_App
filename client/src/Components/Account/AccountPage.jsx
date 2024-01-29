@@ -2,7 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { MainContext } from "../../Context/MainContext";
-
+import Navbar from "../Navbar/Navbar";
+import AccountSidebar from "./AccountSidebar";
+import AccountSection from "./Sections/AccountSection";
 const Account = () => {
   const [user, setUser] = useState({
     username: "",
@@ -23,7 +25,7 @@ const Account = () => {
       .get("/api/accountSettings")
       .then((response) => {
         setUser(response.data.user);
-        console.log(user)
+        console.log(user);
         // Initialize updateInfo state with user data
         // if (response.data.user) {
         //   setUpdateInfo({
@@ -53,12 +55,31 @@ const Account = () => {
         console.error("Error occurred while saving changes:", error);
       });
   };
-
+  const testData = [
+    { label: "username", placeholder: "Username" },
+    { label: "email", placeholder: "email" },
+  ];
   return (
     <>
-      <AccountContext.Provider >
-        <div className="flex flex-col-reverse md:flex-row items-center md:items-start md:justify-between px-4 md:px-10 py-3 h-full">
-          {/* change acc */}
+      <AccountContext.Provider>
+        <div className="">
+          {" "}
+          <Navbar></Navbar>
+        </div>
+        <div className="w-full flex mt-16  items-center px-20 flex-row border-2 border-red-500 h-full">
+          {/* sidebar */}
+          <div>
+            <AccountSidebar />
+          </div>
+
+          {/* sections */}
+          <div className="w-full px-10">
+            <AccountSection numberOfInput={testData.length} data={testData} />
+          </div>
+        </div>
+
+        {/* <div className="flex flex-col-reverse md:flex-row items-center md:items-start md:justify-between px-4 md:px-10 py-3 h-full">
+          // {/* change acc *}
           <div className="flex flex-col md:w-1/2 items-center my-5 ">
             <div>
               <h1>Change Account</h1>
@@ -90,7 +111,6 @@ const Account = () => {
                 </div>
               </div>
 
-              {/* password */}
               <div className="flex flex-col justify-evenly md:px-16 py-3">
                 <div className="flex flex-col">
                   <label htmlFor="input">Password</label>
@@ -109,7 +129,6 @@ const Account = () => {
                 </div>
               </div>
 
-              {/* btn */}
               <div className="md:flex md:justify-center md:items-center">
                 <button
                   className="w-full md:w-80 block bg-rose-500 hover:bg-rose-400 focus:bg-rose-400 text-white 
@@ -122,11 +141,9 @@ const Account = () => {
             </div>
           </div>
 
-          {/* show acc */}
           <div className="flex flex-col w-1/2 items-center my-5 md:my-10 ">
             <div className="">
               <div className="flex flex-col md:flex-row items-center gap-10">
-                {/* img */}
                 <div className="my-1">
                   <img
                     src=""
@@ -135,7 +152,6 @@ const Account = () => {
                   />
                 </div>
 
-                {/* username */}
                 <div className="text-xl">
                   <h1 className="text-center md:self-center">
                     username: {user.username}
@@ -146,7 +162,6 @@ const Account = () => {
                 </div>
               </div>
 
-              {/* password settings */}
               <div className="mt-4">
                 <h1 className="text-center md:text-start">
                   last update: {user && user.password}
@@ -158,7 +173,7 @@ const Account = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </AccountContext.Provider>
     </>
   );
