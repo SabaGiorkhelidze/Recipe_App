@@ -2,9 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { MainContext } from "../../Context/MainContext";
-import Navbar from "../Navbar/Navbar";
-import AccountSidebar from "./AccountSidebar";
-import AccountSection from "./Sections/AccountSection";
+import Navbar from "../../Components/Navbar/Navbar";
+import AccountSidebar from "../../Components/Account/AccountSidebar";
+import AccountSection from "../../Components/Account/Sections/AccountSection";
 const Account = () => {
   const [user, setUser] = useState({
     username: "",
@@ -55,10 +55,7 @@ const Account = () => {
         console.error("Error occurred while saving changes:", error);
       });
   };
-  const testData = [
-    { label: "username", placeholder: "Username" },
-    { label: "email", placeholder: "email" },
-  ];
+  
   return (
     <>
       <AccountContext.Provider>
@@ -66,17 +63,38 @@ const Account = () => {
           {" "}
           <Navbar></Navbar>
         </div>
-        <div className="w-full flex mt-16  items-center px-20 flex-row border-2 border-red-500 h-full">
+
+
+        <div className="w-full flex mt-32 justify-center px-20 flex-row border-2 border-red-500 h-full">
+        
           {/* sidebar */}
-          <div>
+        
+          <div className="">
             <AccountSidebar />
           </div>
 
+        
           {/* sections */}
           <div className="w-full px-10">
-            <AccountSection numberOfInput={testData.length} data={testData} />
+            <AccountSection />
           </div>
         </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         {/* <div className="flex flex-col-reverse md:flex-row items-center md:items-start md:justify-between px-4 md:px-10 py-3 h-full">
           // {/* change acc *}

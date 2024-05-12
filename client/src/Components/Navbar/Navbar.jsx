@@ -6,7 +6,7 @@ import { MainContext } from "../../Context/MainContext";
 const Navbar = () => {
   const [changeHeader, setChangeHeader] = useState(false);
   // const { AccoiuntContext } = useContext(MainContext);
-  
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY >= 50) {
@@ -33,15 +33,17 @@ const Navbar = () => {
     >
       <nav className="flex items-center max-w-screen-xl mx-auto px-6 py-3 text-gray-700 poppins font-semibold">
         {/* left  */}
-        <motion.div
-          whileHover={{ scale: 1.1 }}
-          className="mx-8 my-1 cursor-pointer"
-        >
-          RecipeApp
-        </motion.div>
+        <Link to={"/home"}>
+          <motion.div
+            whileHover={{ scale: 1.1 }}
+            className="mx-8 my-1 cursor-pointer"
+          >
+            RecipeApp
+          </motion.div>
+        </Link>
         <div className="flex flex-grow"></div>
         {/* right  */}
-        <Link to={"/"}>
+        <Link to={"/home"}>
           <motion.div whileHover={{ scale: 1.1 }} className="mx-4 my-1 ">
             Add Post
           </motion.div>

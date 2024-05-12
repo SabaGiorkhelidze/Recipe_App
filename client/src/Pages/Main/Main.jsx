@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useMemo, useContext } from "react";
 import { motion, useAnimation } from "framer-motion"; // Import motion and useAnimation
-import Banner from "./MainComponents/Banner";
-import Navbar from "./Navbar/Navbar";
-import CardLayout from "./MainComponents/CardLayout";
+import Banner from "../../Components/MainComponents/Banner";
+import Navbar from "../../Components/Navbar/Navbar";
+import CardLayout from "../../Components/MainComponents/CardLayout";
 import axios from "axios";
-import { MainContext } from "../Context/MainContext";
+import { MainContext } from "../../Context/MainContext";
 
 const Main = () => {
   const [posts, setPosts] = useState([]);
